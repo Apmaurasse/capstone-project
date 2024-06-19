@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "CardBackSearch",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "description": "The name of the card back."
+      }
+    },
+    "required": [],
+    "additionalProperties": false
+  }

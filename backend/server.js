@@ -1,6 +1,6 @@
 "use strict";
 
-import app from "./app";
+const app = require("./app");
 const { PORT } = require("./config");
 console.log(PORT)
 app.listen(PORT, function () {

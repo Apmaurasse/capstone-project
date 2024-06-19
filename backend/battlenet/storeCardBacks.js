@@ -1,4 +1,4 @@
-import db from './db';
+const db = require('./db');
 const { fetchAllCardBacks } = require('./fetchCardBacks');
 
 // Store card backs in database.

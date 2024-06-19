@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "cardBackNew",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer",
+        "minLength": 1,
+        "description": "The unique identifier for a card back."
+      },
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "description": "The name of the card back."
+      },
+      "text": {
+        "type": "string",
+        "description": "A description of the card back."
+      },
+      "image_url": {
+        "type": "string",
+        "format": "uri",
+        "description": "The URL of the card back's image."
+      },
+      "sort_category": {
+        "type": "string",
+        "description": "A category for sorting the card backs."
+      },
+      "slug": {
+        "type": "string",
+        "description": "A URL-friendly slug for the card back."
+      }
+    },
+    "required": ["id", "name", "image_url"],
+    "additionalProperties": false
+  }
