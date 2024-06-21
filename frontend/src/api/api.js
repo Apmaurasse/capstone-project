@@ -107,5 +107,33 @@ class ProjectOmegaApi {
     let res = await this.request(`users/${username}/likes/${cardBackId}`);
     return res.hasLiked;
   }
+
+/** Get user's collection */
+static async getUserCollection(username) {
+  let res = await this.request(`users/${username}/collections`);
+  return res.collections;
+}
+
+/** Add to user's collection */
+static async addToUserCollection(username, cardBackId) {
+  let res = await this.request(`users/${username}/collections/${cardBackId}`, {}, "post");
+  return res.collection;
+}
+
+/** Remove from user's collection */
+static async removeFromUserCollection(username, cardBackId) {
+  let res = await this.request(`users/${username}/collections/${cardBackId}`, {}, "delete");
+  return res.uncollected;
+}
+
+/** Check if a user has collected a card back. */
+static async hasUserCollected(username, cardBackId) {
+  let res = await this.request(`users/${username}/collections/${cardBackId}`);
+  return res.hasCollected;
+}
 }
 export default ProjectOmegaApi;
+
+
+
+// TODO: Review hasUserLiked and hasUserCollected to check if a user has liked or collected a card back.

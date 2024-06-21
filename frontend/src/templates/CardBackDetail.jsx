@@ -18,7 +18,7 @@ function CardBackDetail() {
   console.debug("CardBackDetail", "id=", id);
 
   const [cardBack, setCardBack] = useState(null);
-  const { likeCardBack, unlikeCardBack, likedCardBacks } = useContext(ProjectOmegaContext);
+  const { likeCardBack, unlikeCardBack, likedCardBacks, collectCardBack, uncollectCardBack, collectedCardBacks } = useContext(ProjectOmegaContext);
 
   useEffect(function getCardBackForUser() {
     async function getCardBack() {
@@ -38,6 +38,14 @@ function CardBackDetail() {
     }
   };
 
+  const handleCollect = async () => {
+    if (collectedCardBacks.has(Number(id))) {  // Ensure ID is a number
+      await uncollectCardBack(Number(id));
+    } else {
+      await collectCardBack(Number(id));
+    }
+  };
+
   return (
     <div>
       <h4>{cardBack.name}</h4>
@@ -47,6 +55,10 @@ function CardBackDetail() {
       )}
       <button onClick={handleLike}>
         {likedCardBacks.has(Number(id)) ? "Unlike" : "Like"}
+      </button>
+
+      <button onClick={handleCollect}>
+        {collectedCardBacks.has(Number(id)) ? "Remove from Collection" : "Add to Collection"}
       </button>
     </div>
   );

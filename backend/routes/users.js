@@ -163,7 +163,7 @@ router.post("/:username/likes/:cardBackId", ensureCorrectUserOrAdmin, async func
 router.delete("/:username/likes/:cardBackId", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
     await User.removeLike(req.params.username, req.params.cardBackId);
-    return res.json({ message: "Deleted" });
+    return res.json({ unliked: req.params.cardBackId });
   } catch (err) {
     return next(err);
   }
@@ -213,7 +213,7 @@ router.post("/:username/collections/:cardBackId", ensureCorrectUserOrAdmin, asyn
 router.delete("/:username/collections/:cardBackId", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
     await User.removeFromCollection(req.params.username, req.params.cardBackId);
-    return res.json({ message: "Deleted" });
+    return res.json({ uncollected: req.params.cardBackId});
   } catch (err) {
     return next(err);
   }

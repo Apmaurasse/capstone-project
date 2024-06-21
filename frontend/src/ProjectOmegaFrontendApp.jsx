@@ -26,12 +26,9 @@ export const TOKEN_STORAGE_ID = "project-omega-token";
  */
 const ProjectOmegaFrontendApp = () => {
   const [infoLoaded, setInfoLoaded] = useState(false);
-  //Todo:
-  //Review how the state is used throughout the app. 
-  // Update to use with liked card backs and collections.
-  // const [applicationIds, setApplicationIds] = useState(new Set([]));
   const [currentUser, setCurrentUser] = useState(null);
   const [likedCardBacks, setLikedCardBacks] = useState(new Set());
+  const [collectedCardBacks, setCollectedCardBacks] = useState(new Set());
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
 
   console.debug(
@@ -39,6 +36,7 @@ const ProjectOmegaFrontendApp = () => {
     "infoLoaded=", infoLoaded,
     "currentUser=", currentUser,
     "likedCardBacks=", likedCardBacks,
+    "collectedCardBacks=", collectedCardBacks,
     "token=", token,
   );
 
@@ -57,13 +55,15 @@ const ProjectOmegaFrontendApp = () => {
         // `null` as the key, `true` to disable signature verification
           // put the token on the Api class so it can use it to call the API.
           ProjectOmegaApi.token = token;
+
           let currentUser = await ProjectOmegaApi.getCurrentUser(username);
           setCurrentUser(currentUser);
-          // Todo:
-          // Add function to for set cardBack ids from current user 
-           // Fetch and set liked card backs
+
           let likedCardBacks = await ProjectOmegaApi.getUserLikes(username);
           setLikedCardBacks(new Set(likedCardBacks));
+
+          let collectedCardBacks = await ProjectOmegaApi.getUserCollection(username);
+          setCollectedCardBacks(new Set(collectedCardBacks));
         } catch (err) {
           console.error("App loadUserInfo: problem loading", err);
           setCurrentUser(null);
@@ -84,6 +84,7 @@ const ProjectOmegaFrontendApp = () => {
     setCurrentUser(null);
     setToken(null);
     setLikedCardBacks(new Set([]));
+    setCollectedCardBacks(new Set([]));
   }
 
   /** Handles site-wide signup.
@@ -117,9 +118,6 @@ const ProjectOmegaFrontendApp = () => {
       return { success: false, errors };
     }
   }
-
-  // TODO: add a function to check if a card back has been liked, or added to collection.
-  // TODO: add a function to like card backs and add to collection.
   
   /** Check if a card back is liked by the user */
   function hasLiked(cardBackId) {
@@ -146,15 +144,38 @@ const ProjectOmegaFrontendApp = () => {
       }
     }
 
-  // console.log(currentUser);
-  // console.log(likedCardBacks);
+  /** Check if a card back has been collected by the user */
+  function hasCollected(cardBackId) {
+    return collectedCardBacks.has(cardBackId);
+  }
+
+  /** Add a card back to user's collection */
+  async function collectCardBack(cardBackId) {
+    try {
+        await ProjectOmegaApi.addToUserCollection(currentUser.username, cardBackId);
+        setCollectedCardBacks(new Set([...collectedCardBacks, cardBackId]));
+      } catch (err) {
+        console.error("addToUserCollection failed", err);
+      }
+    }
+
+  /** Remove a card back from a user's collection. */
+  async function uncollectCardBack(cardBackId) {
+    try {
+        await ProjectOmegaApi.removeFromUserCollection(currentUser.username, cardBackId);
+        setCollectedCardBacks(new Set([...collectedCardBacks].filter(id => id !== cardBackId)));
+      } catch (err) {
+        console.error("uncollectCardBack failed", err);
+      }
+    }
+
   if (!infoLoaded) {
     return <LoadingSpinner />;
   }
 
   return (
     <ProjectOmegaContext.Provider 
-      value={{currentUser, setCurrentUser, hasLiked, likeCardBack, unlikeCardBack, likedCardBacks}}>
+      value={{currentUser, setCurrentUser, hasLiked, likeCardBack, unlikeCardBack, likedCardBacks, hasCollected, collectCardBack, uncollectCardBack, collectedCardBacks}}>
           <ProjectOmegaRoutes login={login} signup={signup} logout={logout}/>
     </ProjectOmegaContext.Provider>
   );
