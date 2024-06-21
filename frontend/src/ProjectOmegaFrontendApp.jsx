@@ -31,12 +31,14 @@ const ProjectOmegaFrontendApp = () => {
   // Update to use with liked card backs and collections.
   // const [applicationIds, setApplicationIds] = useState(new Set([]));
   const [currentUser, setCurrentUser] = useState(null);
+  const [likedCardBacks, setLikedCardBacks] = useState(new Set());
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
 
   console.debug(
     "App",
     "infoLoaded=", infoLoaded,
     "currentUser=", currentUser,
+    "likedCardBacks=", likedCardBacks,
     "token=", token,
   );
 
@@ -59,6 +61,9 @@ const ProjectOmegaFrontendApp = () => {
           setCurrentUser(currentUser);
           // Todo:
           // Add function to for set cardBack ids from current user 
+           // Fetch and set liked card backs
+          let likedCardBacks = await ProjectOmegaApi.getUserLikes(username);
+          setLikedCardBacks(new Set(likedCardBacks));
         } catch (err) {
           console.error("App loadUserInfo: problem loading", err);
           setCurrentUser(null);
@@ -72,13 +77,13 @@ const ProjectOmegaFrontendApp = () => {
     // to false to control the spinner.
     setInfoLoaded(false);
     getCurrentUser();
-
   }, [token]);
 
   /** Handles site-wide logout. */
   function logout() {
     setCurrentUser(null);
     setToken(null);
+    setLikedCardBacks(new Set([]));
   }
 
   /** Handles site-wide signup.
@@ -115,15 +120,41 @@ const ProjectOmegaFrontendApp = () => {
 
   // TODO: add a function to check if a card back has been liked, or added to collection.
   // TODO: add a function to like card backs and add to collection.
- 
+  
+  /** Check if a card back is liked by the user */
+  function hasLiked(cardBackId) {
+    return likedCardBacks.has(cardBackId);
+  }
 
+    /** Add a like to a card back */
+  async function likeCardBack(cardBackId) {
+    try {
+        await ProjectOmegaApi.addUserLike(currentUser.username, cardBackId);
+        setLikedCardBacks(new Set([...likedCardBacks, cardBackId]));
+      } catch (err) {
+        console.error("likeCardBack failed", err);
+      }
+    }
+
+  /** Remove a like from a card back */
+  async function unlikeCardBack(cardBackId) {
+    try {
+        await ProjectOmegaApi.removeUserLike(currentUser.username, cardBackId);
+        setLikedCardBacks(new Set([...likedCardBacks].filter(id => id !== cardBackId)));
+      } catch (err) {
+        console.error("unlikeCardBack failed", err);
+      }
+    }
+
+  // console.log(currentUser);
+  // console.log(likedCardBacks);
   if (!infoLoaded) {
     return <LoadingSpinner />;
   }
 
   return (
     <ProjectOmegaContext.Provider 
-      value={{currentUser, setCurrentUser}}>
+      value={{currentUser, setCurrentUser, hasLiked, likeCardBack, unlikeCardBack, likedCardBacks}}>
           <ProjectOmegaRoutes login={login} signup={signup} logout={logout}/>
     </ProjectOmegaContext.Provider>
   );

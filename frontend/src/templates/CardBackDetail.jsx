@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import ProjectOmegaApi from "../api/api";
+import ProjectOmegaContext from "../auth/ProjectOmegaContext";
 import LoadingSpinner from "../common/LoadingSpinner";
 
-/** Company Detail page.
+/** CardBack Detail page.
  *
  * Renders information about a card back.
  * 
@@ -17,6 +18,7 @@ function CardBackDetail() {
   console.debug("CardBackDetail", "id=", id);
 
   const [cardBack, setCardBack] = useState(null);
+  const { likeCardBack, unlikeCardBack, likedCardBacks } = useContext(ProjectOmegaContext);
 
   useEffect(function getCardBackForUser() {
     async function getCardBack() {
@@ -28,15 +30,29 @@ function CardBackDetail() {
 
   if (!cardBack) return <LoadingSpinner />;
 
+  const handleLike = async () => {
+    if (likedCardBacks.has(Number(id))) {  // Ensure ID is a number
+      await unlikeCardBack(Number(id));
+    } else {
+      await likeCardBack(Number(id));
+    }
+  };
+
   return (
-      <div>
-        <h4>{cardBack.name}</h4>
-        <p>{cardBack.text}</p>
-        {cardBack.imageUrl && <img src={cardBack.imageUrl}
-                             alt={cardBack.name}
-                             />}
-      </div>
+    <div>
+      <h4>{cardBack.name}</h4>
+      <p>{cardBack.text}</p>
+      {cardBack.imageUrl && (
+        <img src={cardBack.imageUrl} alt={cardBack.name} />
+      )}
+      <button onClick={handleLike}>
+        {likedCardBacks.has(Number(id)) ? "Unlike" : "Like"}
+      </button>
+    </div>
   );
 }
 
 export default CardBackDetail;
+
+
+

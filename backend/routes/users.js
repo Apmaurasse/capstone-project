@@ -118,8 +118,105 @@ router.delete("/:username", ensureCorrectUserOrAdmin, async function (req, res, 
   }
 });
 
+/** GET /[username]/likes => { likes: [cardBackId, ...] }
+ *
+ * Returns list of card back IDs liked by the user.
+ *
+ * Authorization required: same user-as-:username or admin
+ **/
 
-// TODO: Create logic liking a card back and adding a card back to the user's collection.
+router.get("/:username/likes", ensureCorrectUserOrAdmin, async function (req, res, next) {
+  try {
+    const likes = await User.getUserLikes(req.params.username);
+    // console.log(likes);
+    return res.json({ likes });
+  } catch (err) {
+    return next(err);
+  }
+});
 
+
+/** POST /[username]/likes/:cardBackId => { liked: cardBackId }
+ *
+ * Adds a like to a card back for the user.
+ *
+ * Authorization required: logged in
+ **/
+
+router.post("/:username/likes/:cardBackId", ensureCorrectUserOrAdmin, async function (req, res, next) {
+  try {
+    const like = await User.addLike(req.params.username, req.params.cardBackId);
+    return res.status(201).json({ like });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+
+/** DELETE /[username]/likes/:cardBackId => { unliked: cardBackId }
+ *
+ * Removes a like from a card back for the user.
+ *
+ * Authorization required: logged in
+ **/
+
+router.delete("/:username/likes/:cardBackId", ensureCorrectUserOrAdmin, async function (req, res, next) {
+  try {
+    await User.removeLike(req.params.username, req.params.cardBackId);
+    return res.json({ message: "Deleted" });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+/** GET /[username]/collections => { collections: [cardBackId, ...] }
+ *
+ * Returns list of card back IDs collected by the user.
+ *
+ * Authorization required: same user-as-:username or admin
+ **/
+
+router.get("/:username/collections", ensureCorrectUserOrAdmin, async function (req, res, next) {
+  try {
+    const collections = await User.getUserCollections(req.params.username);
+    return res.json({ collections });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+
+/** POST /[username]/collections/:cardBackId => { Collected: cardBackId }
+ *
+ * Adds a card back to the user's collection.
+ *
+ * Authorization required: logged in
+ **/
+
+router.post("/:username/collections/:cardBackId", ensureCorrectUserOrAdmin, async function (req, res, next) {
+  try {
+    const collection = await User.addToCollection(req.params.username, req.params.cardBackId);
+    return res.status(201).json({ collection });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+
+/** DELETE /[username]/collections/:cardBackId => { Uncollected: cardBackId }
+ *
+ * Removes a card back from the user's collection.
+ *
+ * Authorization required: logged in
+ **/
+
+router.delete("/:username/collections/:cardBackId", ensureCorrectUserOrAdmin, async function (req, res, next) {
+  try {
+    await User.removeFromCollection(req.params.username, req.params.cardBackId);
+    return res.json({ message: "Deleted" });
+  } catch (err) {
+    return next(err);
+  }
+});
 
 module.exports = router;

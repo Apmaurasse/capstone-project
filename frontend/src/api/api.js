@@ -56,10 +56,10 @@ class ProjectOmegaApi {
 
     /** Get details on a company by handle. */
 
-    static async getCardBack(id) {
-      let res = await this.request(`cardBacks/${id}`);
-      return res.cardBack;
-    }
+  static async getCardBack(id) {
+    let res = await this.request(`cardBacks/${id}`);
+    return res.cardBack;
+  }
 
 
   /** Get token for login from username, password. */
@@ -82,7 +82,30 @@ class ProjectOmegaApi {
     let res = await this.request(`users/${username}`, data, "patch");
     return res.user;
   }
+
+/** Get user's likes */
+  static async getUserLikes(username) {
+    let res = await this.request(`users/${username}/likes`);
+    // console.log(res.likes)
+    return res.likes;
+  }
+
+/** Add to user's likes */
+  static async addUserLike(username, cardBackId) {
+    let res = await this.request(`users/${username}/likes/${cardBackId}`, {}, "post");
+    return res.liked;
+  }
+
+/** Remove from user's likes */
+  static async removeUserLike(username, cardBackId) {
+    let res = await this.request(`users/${username}/likes/${cardBackId}`, {}, "delete");
+    return res.unliked;
+  }
+
+/** Check if a user has liked a card back. */
+  static async hasUserLiked(username, cardBackId) {
+    let res = await this.request(`users/${username}/likes/${cardBackId}`);
+    return res.hasLiked;
+  }
 }
-
-
 export default ProjectOmegaApi;

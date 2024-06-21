@@ -32,8 +32,8 @@ CREATE TABLE UserLikes (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
     card_back_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES Users(id),
-    FOREIGN KEY (card_back_id) REFERENCES CardBacks(id),
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
+    FOREIGN KEY (card_back_id) REFERENCES CardBacks(id) ON DELETE CASCADE,
     UNIQUE(user_id, card_back_id)
 );
 
@@ -42,7 +42,7 @@ CREATE TABLE UserCollections (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
     card_back_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES Users(id),
-    FOREIGN KEY (card_back_id) REFERENCES CardBacks(id),
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
+    FOREIGN KEY (card_back_id) REFERENCES CardBacks(id) ON DELETE CASCADE,
     UNIQUE(user_id, card_back_id)
 );

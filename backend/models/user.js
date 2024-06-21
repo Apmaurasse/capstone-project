@@ -10,6 +10,8 @@ const {
 } = require("../expressError");
 
 const { BCRYPT_WORK_FACTOR } = require("../config.js");
+const UserLikes = require("./userLikes");
+const UserCollections = require("./userCollections");
 
 /** Related functions for users. */
 
@@ -205,8 +207,163 @@ class User {
     if (!user) throw new NotFoundError(`No user: ${username}`);
   }
 
-  // TODO: add methods for adding and removing likes/collections
+
+
+   /** Add a like to the user's liked card backs.
+   *
+   * data should be { username, cardBackId }
+   *
+   * Returns { id, userId, cardBackId }
+   **/
+
+  static async addLike(username, cardBackId) {
+    // Retrieve user_id based on username
+    const userRes = await db.query(
+      `SELECT id
+       FROM Users
+       WHERE username = $1`,
+      [username]
+    );
+
+    const user = userRes.rows[0];
+    if (!user) throw new NotFoundError(`No user: ${username}`);
+
+    const userId = user.id;
+
+    return await UserLikes.create({ userId, cardBackId });
+  }
+
+  /** Remove a like from the user's liked card backs.
+   *
+   * data should be { username, cardBackId }
+   *
+   * Returns undefined.
+   **/
+
+  static async removeLike(username, cardBackId) {
+    // Retrieve user_id based on username
+    const userRes = await db.query(
+      `SELECT id
+       FROM Users
+       WHERE username = $1`,
+      [username]
+    );
+
+    const user = userRes.rows[0];
+    if (!user) throw new NotFoundError(`No user: ${username}`);
+
+    const userId = user.id;
+    console.debug("removeLike userId:", userId);
+
+    cardBackId = parseInt(cardBackId, 10); // Ensure cardBackId is an integer
+    return await UserLikes.remove(userId, cardBackId);
+  }
+
+  /** Check if a user has liked a card back.
+   *
+   * Returns { user_id, card_back_id } or undefined if not found.
+   **/
+  static async hasLiked(userId, cardBackId) {
+    return await UserLikes.findOne({ user_id: userId, card_back_id: cardBackId });
+  }
   
+  /** Get user likes for a given username.
+   *
+   * Returns [{ card_back_id, ...}]
+   **/
+
+  static async getUserLikes(username) {
+    const result = await db.query(
+      `SELECT ul.card_back_id
+       FROM UserLikes AS ul
+       JOIN Users AS u ON ul.user_id = u.id
+       WHERE u.username = $1`,
+      [username]
+    );
+
+    // Return an empty array if no likes are found
+    // console.log(result.rows.map(row => row.card_back_id))
+    return result.rows.map(row => row.card_back_id);
+  }
+
+
+   /** Add a card back to the user's collected card backs.
+   *
+   * data should be { username, cardBackId }
+   *
+   * Returns { id, userId, cardBackId }
+   **/
+
+   static async addToCollection(username, cardBackId) {
+    // Retrieve user_id based on username
+    const userRes = await db.query(
+      `SELECT id
+       FROM Users
+       WHERE username = $1`,
+      [username]
+    );
+
+    const user = userRes.rows[0];
+    if (!user) throw new NotFoundError(`No user: ${username}`);
+
+    const userId = user.id;
+
+    return await UserCollections.create({ userId, cardBackId });
+  }
+
+  /** Remove a card back from the user's collected card backs.
+   *
+   * data should be { username, cardBackId }
+   *
+   * Returns undefined.
+   **/
+
+  static async removeFromCollection(username, cardBackId) {
+    // Retrieve user_id based on username
+    const userRes = await db.query(
+      `SELECT id
+       FROM Users
+       WHERE username = $1`,
+      [username]
+    );
+
+    const user = userRes.rows[0];
+    if (!user) throw new NotFoundError(`No user: ${username}`);
+
+    const userId = user.id;
+    console.debug("removeFromCollection userId:", userId);
+
+    cardBackId = parseInt(cardBackId, 10); // Ensure cardBackId is an integer
+    return await UserCollections.remove(userId, cardBackId);
+  }
+
+  /** Check if a user has collected a card back.
+   *
+   * Returns { user_id, card_back_id } or undefined if not found.
+   **/
+  static async hasCollected(userId, cardBackId) {
+    return await UserCollections.findOne({ user_id: userId, card_back_id: cardBackId });
+  }
+  
+  /** Get user collections for a given username.
+   *
+   * Returns [{ card_back_id, ...}]
+   **/
+
+  static async getUserCollections(username) {
+    const result = await db.query(
+      `SELECT uC.card_back_id
+       FROM UserCollections AS uC
+       JOIN Users AS u ON uC.user_id = u.id
+       WHERE u.username = $1`,
+      [username]
+    );
+
+    // Return an empty array if no collected card backs are found
+    // console.log(result.rows.map(row => row.card_back_id))
+    return result.rows.map(row => row.card_back_id);
+  }
+
 }
 
 

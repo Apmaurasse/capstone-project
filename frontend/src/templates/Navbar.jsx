@@ -15,6 +15,9 @@ function Navbar({logout}) {
                         <Link to="/cardbacks">Card Backs</Link>
                     </li>
                     <li>
+                        <Link to="/likes">Likes</Link>
+                    </li>
+                    <li>
                         <Link to="/" onClick={logout}>
                         Logout {currentUser.firstName || currentUser.username}
                         </Link></li>

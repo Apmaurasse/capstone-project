@@ -8,6 +8,7 @@ import LoginForm from "./templates/LoginForm";
 import ProfileForm from "./templates/ProfileForm";
 import CardBackList from "./templates/CardBackList";
 import CardBackDetail from "./templates/CardBackDetail";
+import UserLikes from "./templates/UserLikes";
 import ProjectOmegaContext from "./auth/ProjectOmegaContext";
 
 
@@ -20,6 +21,7 @@ const ProjectOmegaRoutes = ({signup, login, logout}) => {
                 <Route index element={<Homepage />} />
                 <Route path="signup" element={<SignupForm signup={signup}/>} />
                 <Route path="login" element={<LoginForm login={login}/>} />
+                
                 <Route
                 path="profile"
                 element={currentUser ? (<ProfileForm />) : (<Navigate to="/login" />)}/>
@@ -29,6 +31,9 @@ const ProjectOmegaRoutes = ({signup, login, logout}) => {
                 <Route
                 path="cardbacks/:id"
                 element={currentUser ? (<CardBackDetail />) : (<Navigate to="/login" />)}/>
+                <Route
+                path="likes"
+                element={currentUser ? (<UserLikes />) : (<Navigate to="/login" />)}/>
                 
                 <Route path="*" element={<Navigate to="/" />} />
                 

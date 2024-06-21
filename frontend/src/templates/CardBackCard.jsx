@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
  * CardBackList -> CardBackCard
  */
 
-function CardBackCard({ name, description, imageUrl, id }) {
+function CardBackCard({ name, imageUrl, id }) {
   console.debug("CardBackCard", imageUrl);
 
   return (
