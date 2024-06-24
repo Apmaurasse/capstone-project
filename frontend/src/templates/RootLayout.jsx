@@ -1,13 +1,13 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Navbar from "./Navbar";
+import NavbarComponent from "./Navbar";
 
 
 const RootLayout = ({logout}) => {
     return (
         <div>
             <header>
-                <Navbar logout={logout} />
+                <NavbarComponent logout={logout} />
             </header>
             <main>
             <Outlet />

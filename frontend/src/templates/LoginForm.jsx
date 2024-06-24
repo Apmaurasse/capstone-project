@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "../common/Alert";
+import './Forms.css'; // Import the CSS file
 
 // Todo: 
 // Update login form to route to cardbacks gallery.
@@ -10,7 +11,7 @@ import Alert from "../common/Alert";
  * Shows form and manages update to state on changes.
  * On submission:
  * - calls login function prop
- * - redirects to /hompage route
+ * - redirects to /homepage route
  *
  * Routes -> LoginForm -> Alert
  * Routed as /login
@@ -41,11 +42,10 @@ function LoginForm({ login }) {
   }
 
   return (
-    <div className="LoginForm">
-      <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-        <h3 className="mb-3">Log In</h3>
-
-        <div className="card">
+    <div className="container">
+      <div className="col-md-6 col-lg-4">
+        <h3 className="header mb-3">Log In</h3>
+        <div className="card content">
           <div className="card-body">
             <form onSubmit={handleSubmit}>
               <div className="form-group">
@@ -77,8 +77,8 @@ function LoginForm({ login }) {
                 : null}
 
               <button
-                className="btn btn-primary float-right"
-                onSubmit={handleSubmit}
+                className="btn btn-primary float-right button"
+                type="submit"
               >
                 Submit
               </button>

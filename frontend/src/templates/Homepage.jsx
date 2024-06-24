@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import ProjectOmegaContext from "../auth/ProjectOmegaContext";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 /** Homepage of site.
  *
@@ -14,22 +15,39 @@ function Homepage() {
   const { currentUser } = useContext(ProjectOmegaContext);
   console.debug("Homepage", "currentUser=", currentUser);
 
+  const styles = {
+    container: {
+      backgroundColor: 'black',
+      height: '100vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    content: {
+      backgroundColor: '#343a40', // Bootstrap dark grey color
+      color: 'white',
+      padding: '20px',
+      borderRadius: '4px',
+      textAlign: 'center',
+    }
+  };
+
   return (
-      <div>
-        <div>
-          <h1>Project Omega</h1>
-          <p>Test Project.</p>
-          {currentUser
-              ? <h2>
-                Welcome Back, {currentUser.firstName || currentUser.username}!
-              </h2>
-              : (
-                  <p>
-                    An additional welcome message. Maybe some links.
-                  </p>
-              )}
-        </div>
+    <div style={styles.container}>
+      <div style={styles.content}>
+        <h1>Project Omega</h1>
+
+        {currentUser ? (
+          <h2>
+            Welcome Back, {currentUser.firstName || currentUser.username}!
+          </h2>
+        ) : (
+          <p>
+            A site for viewing Hearthstone card backs.
+          </p>
+        )}
       </div>
+    </div>
   );
 }
 

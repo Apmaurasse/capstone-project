@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import ProjectOmegaApi from "../api/api";
 import ProjectOmegaContext from "../auth/ProjectOmegaContext";
 import LoadingSpinner from "../common/LoadingSpinner";
+import "./CardBackDetail.css"; // Import CSS file for custom styles
 
 /** CardBack Detail page.
  *
@@ -47,24 +48,26 @@ function CardBackDetail() {
   };
 
   return (
-    <div>
+    <div className="card-back-detail-container">
       <h4>{cardBack.name}</h4>
       <p>{cardBack.text}</p>
-      {cardBack.imageUrl && (
-        <img src={cardBack.imageUrl} alt={cardBack.name} />
-      )}
-      <button onClick={handleLike}>
-        {likedCardBacks.has(Number(id)) ? "Unlike" : "Like"}
-      </button>
-
-      <button onClick={handleCollect}>
-        {collectedCardBacks.has(Number(id)) ? "Remove from Collection" : "Add to Collection"}
-      </button>
+      <div className="image-container">
+        <img src={cardBack.imageUrl} alt={cardBack.name} className="card-back-image" />
+        <div className="overlay">
+          <button className="overlay-button" onClick={handleLike}>
+            {likedCardBacks.has(Number(id)) ? "Unlike" : "Like"}
+          </button>
+          <button className="overlay-button" onClick={handleCollect}>
+            {collectedCardBacks.has(Number(id)) ? "Remove from Collection" : "Add to Collection"}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
 
 export default CardBackDetail;
+
 
 
 

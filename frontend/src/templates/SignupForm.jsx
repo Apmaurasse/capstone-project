@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "../common/Alert";
+import './Forms.css'; // Import the CSS file
 
 // Todo:
 // Update signup form to route to cardbacks gallery.
@@ -43,55 +44,69 @@ function SignupForm({ signup }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label>Username</label>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-        />
+    <div className="container">
+      <div className="col-md-6 col-lg-4">
+        <h3 className="header">Sign Up</h3>
+        <div className="card content">
+          <div className="card-body">
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label>Username</label>
+                <input
+                  type="text"
+                  name="username"
+                  className="form-control"
+                  value={formData.username}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  className="form-control"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  className="form-control"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>First Name</label>
+                <input
+                  type="text"
+                  name="firstName"
+                  className="form-control"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Last Name</label>
+                <input
+                  type="text"
+                  name="lastName"
+                  className="form-control"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                />
+              </div>
+              <button className="btn btn-primary btn-block mt-4 button" type="submit">Signup</button>
+              {formErrors.length ? <Alert type="danger" messages={formErrors} /> : null}
+            </form>
+          </div>
+        </div>
       </div>
-      <div className="form-group">
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label>First Name</label>
-        <input
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label>Last Name</label>
-        <input
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-        />
-      </div>
-      <button type="submit">Signup</button>
-      <Alert errors={formErrors} />
-    </form>
+    </div>
   );
 }
 

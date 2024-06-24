@@ -1,0 +1,21 @@
+.card-back-card {
+    background-color: darkgrey;
+    color: white;
+    border: none;
+  }
+  
+  .card-back-card .card-title {
+    font-size: 1rem;
+  }
+  
+  .card-back-card .card-img-small {
+    height: 150px; /* Adjust the height as needed */
+    object-fit: cover; /* Ensure the image covers the entire space */
+  }
+  
+  .card-back-card .card-img {
+    height: 200px; /* Default size for larger images */
+    object-fit: cover; /* Ensure the image covers the entire space */
+  }
+  
+  

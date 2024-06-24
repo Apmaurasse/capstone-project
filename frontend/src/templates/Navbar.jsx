@@ -1,54 +1,46 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap";
 import ProjectOmegaContext from "../auth/ProjectOmegaContext";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Navbar({logout}) {
-    const {currentUser} = useContext(ProjectOmegaContext);
-    
+function NavbarComponent({ logout }) {
+    const { currentUser } = useContext(ProjectOmegaContext);
+
     function LoggedInNavbar() {
-        return ( 
-                <ul>
-                    <li>
-                        <Link to="/profile">Profile</Link>
-                    </li>
-                    <li>
-                        <Link to="/cardbacks">Card Backs</Link>
-                    </li>
-                    <li>
-                        <Link to="/likes">Likes</Link>
-                    </li>
-                    <li>
-                        <Link to="/collection">Collection</Link>
-                    </li>
-                    <li>
-                        <Link to="/" onClick={logout}>
-                        Logout {currentUser.firstName || currentUser.username}
-                        </Link></li>
-                </ul>
+        return (
+            <>
+                <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
+                <Nav.Link as={Link} to="/cardbacks">Card Backs</Nav.Link>
+                <Nav.Link as={Link} to="/likes">Likes</Nav.Link>
+                <Nav.Link as={Link} to="/collection">Collection</Nav.Link>
+                <Nav.Link as={Link} to="/" onClick={logout}>
+                    Logout {currentUser.firstName || currentUser.username}
+                </Nav.Link>
+            </>
         );
     }
 
     function LoggedOutNavbar() {
-        return ( 
-                <ul>
-                    <li>
-                        <Link to="/signup">Signup</Link>
-                    </li>
-                    <li>
-                        <Link to="/login">Login</Link>
-                    </li>
-                </ul>
+        return (
+            <>
+                <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
+                <Nav.Link as={Link} to="/login">Login</Nav.Link>
+            </>
         );
     }
-   
-    return (
-        <nav>
-        <Link to="/">Project Omega</Link>
-        {currentUser ? LoggedInNavbar() : LoggedOutNavbar()}
-        </nav>
-    )
 
-   
+    return (
+        <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
+            <Navbar.Brand as={Link} to="/" className="ms-4">Project Omega</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="ml-auto">
+                    {currentUser ? LoggedInNavbar() : LoggedOutNavbar()}
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
+    );
 }
 
-export default Navbar;
+export default NavbarComponent;

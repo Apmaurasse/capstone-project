@@ -1,0 +1,59 @@
+body {
+  padding-top: 56px; /* Adjust based on the height of your navbar */
+  margin: 0;
+}
+
+html, body, #root {
+  height: 100%; /* Ensure the html, body, and root elements span the full height */
+}
+
+.card-back-list-container {
+  background-color: black;
+  min-height: 100vh; /* Ensure the container spans the full viewport height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-top: 56px; /* Adjust based on the height of your navbar */
+}
+
+.liked-card-backs-header,
+.collected-card-backs-header {
+  color: white;
+  margin-bottom: 20px; /* Add some space below the header */
+}
+
+.card-back-list {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 10px;
+  width: 100%;
+}
+
+.card-back-list-item {
+  flex: 0 0 auto; /* Prevent items from stretching */
+  margin-right: 30px; /* Increased space between card backs */
+}
+
+.card-back-list-item:last-child {
+  margin-right: 0;
+}
+
+.card-img-small {
+  height: 150px; /* Adjust the height as needed */
+  width: auto; /* Ensure the image scales proportionally */
+  object-fit: cover; /* Ensure the image covers the entire space */
+}
+
+.card-img {
+  height: 200px; /* Default size for larger images */
+  width: auto; /* Ensure the image scales proportionally */
+  object-fit: cover; /* Ensure the image covers the entire space */
+}
+
+
+  
+  
+  
+  

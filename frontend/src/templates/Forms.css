@@ -1,0 +1,55 @@
+/* Forms.css */
+
+html, body {
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden; /* Optional: prevent horizontal scroll */
+  }
+  
+  .container {
+    background-color: black;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .content {
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+  }
+  
+  .header {
+    color: #f8f9fa; /* light color for contrast */
+    text-align: center;
+    margin-bottom: 20px; /* spacing below the header */
+  }
+  
+  .username {
+    background-color: #495057; /* slightly lighter grey for contrast */
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  .button {
+    font-family: Arial, sans-serif; /* change this to the desired font family */
+    font-size: 1rem; /* adjust the font size as needed */
+    font-weight: bold; /* adjust the font weight as needed */
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Optional: rounded corners */
+    padding: 10px 20px; /* Adjust padding as needed */
+  }
+  
+  

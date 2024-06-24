@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import ProjectOmegaApi from "../api/api";
 import CardBackCard from "./CardBackCard";
 import LoadingSpinner from "../common/LoadingSpinner";
+import "./CardBackList.css"; // Assuming you have a CSS file for custom styles
 
-
-// Todo: add search form
 /** Show page with list of card backs.
  *
  * On mount, loads card backs from API.
@@ -29,33 +28,35 @@ function CardBackList() {
   async function search() {
     let cardBacks = await ProjectOmegaApi.getCardBacks();
     setCardBacks(cardBacks);
-    // console.log(cardBacks);
   }
 
   if (!cardBacks) return <LoadingSpinner />;
 
   return (
-      <div>
-        {cardBacks.length
-            ? (
-                <div>
-                  {cardBacks.map(c => (
-                      <CardBackCard
-                        key={c.id}
-                        id={c.id}
-                        name={c.name}
-                        description={c.text}
-                        imageUrl={c.imageUrl}
-                        sortCategory={c.sortCategory}
-                        slug={c.slug}                          
-                      />
-                  ))}
-                </div>
-            ) : (
-                <p>Sorry, no results were found!</p>
-            )}
+    <div className="card-back-list-container">
+      <h4 className="liked-card-backs-header">Gallery</h4>
+      <div className="card-back-list">
+        {cardBacks.length ? (
+          cardBacks.map((c) => (
+            <div key={c.id} className="card-back-list-item">
+              <CardBackCard
+                id={c.id}
+                name={c.name}
+                description={c.text}
+                imageUrl={c.imageUrl}
+                sortCategory={c.sortCategory}
+                slug={c.slug}
+                imageSize="small" // Pass prop to control image size
+              />
+            </div>
+          ))
+        ) : (
+          <p>Sorry, no results were found!</p>
+        )}
       </div>
+    </div>
   );
 }
 
 export default CardBackList;
+

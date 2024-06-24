@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 import ProjectOmegaApi from "../api/api";
 import ProjectOmegaContext from "../auth/ProjectOmegaContext";
 import LoadingSpinner from "../common/LoadingSpinner";
+import CardBackCard from "./CardBackCard";
+import "./CardBackList.css"; // Assuming you use the same CSS file for styles
 
 /** UserLikes page.
  *
@@ -38,25 +39,29 @@ function UserLikes() {
   if (loading) return <LoadingSpinner />;
 
   return (
-    <div>
-      <h4>Liked Card Backs</h4>
+    <div className="card-back-list-container">
+      <h4 className="liked-card-backs-header">Liked Card Backs</h4>
       {cardBacks.length === 0 ? (
         <p>You have not liked any card backs yet.</p>
       ) : (
-        <ul>
+        <div className="card-back-list">
           {cardBacks.map(cardBack => (
-            <li key={cardBack.id}>
-              <h5><Link to={`/cardbacks/${cardBack.id}`}>{cardBack.name}</Link></h5>
-              <p>{cardBack.text}</p>
-              {cardBack.imageUrl && (
-                <img src={cardBack.imageUrl} alt={cardBack.name} width="100" />
-              )}
-            </li>
+            <div key={cardBack.id} className="card-back-list-item">
+              <CardBackCard
+                id={cardBack.id}
+                name={cardBack.name}
+                imageUrl={cardBack.imageUrl}
+                imageSize="small" // Set image size as required
+              />
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
 }
 
 export default UserLikes;
+
+
+
