@@ -3,21 +3,15 @@ import ProjectOmegaApi from "../api/api";
 import ProjectOmegaContext from "../auth/ProjectOmegaContext";
 import LoadingSpinner from "../common/LoadingSpinner";
 import CardBackCard from "./CardBackCard";
+import CardBackModal from "./CardBackModal";
 import "./CardBackList.css"; // Assuming you use the same CSS file for styles
 
-/** UserCollection page.
- *
- * Renders a list of card backs collected by the user.
- *
- * Routed at /user/collection
- *
- * Routes -> UserCollection
- */
-
 function UserCollection() {
-  const { collectedCardBacks } = useContext(ProjectOmegaContext);
+  const { likedCardBacks, collectedCardBacks, likeCardBack, unlikeCardBack, collectCardBack, uncollectCardBack } = useContext(ProjectOmegaContext);
   const [cardBacks, setCardBacks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
     async function getCollectedCardBacks() {
@@ -36,6 +30,34 @@ function UserCollection() {
     getCollectedCardBacks();
   }, [collectedCardBacks]);
 
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedCard(null);
+  };
+
+  const handleLike = async (id) => {
+    if (likedCardBacks.has(id)) {
+      await unlikeCardBack(id);
+    } else {
+      await likeCardBack(id);
+    }
+    setCardBacks((prev) => prev.map((card) => (card.id === id ? { ...card, isLiked: !card.isLiked } : card)));
+  };
+
+  const handleCollect = async (id) => {
+    if (collectedCardBacks.has(id)) {
+      await uncollectCardBack(id);
+    } else {
+      await collectCardBack(id);
+    }
+    setCardBacks((prev) => prev.map((card) => (card.id === id ? { ...card, isCollected: !card.isCollected } : card)));
+  };
+
   if (loading) return <LoadingSpinner />;
 
   return (
@@ -46,7 +68,11 @@ function UserCollection() {
       ) : (
         <div className="card-back-list">
           {cardBacks.map(cardBack => (
-            <div key={cardBack.id} className="card-back-list-item">
+            <div 
+              key={cardBack.id} 
+              className="card-back-list-item" 
+              onClick={() => handleCardClick(cardBack)}>
+              
               <CardBackCard
                 id={cardBack.id}
                 name={cardBack.name}
@@ -57,8 +83,22 @@ function UserCollection() {
           ))}
         </div>
       )}
+
+      {selectedCard && (
+        <CardBackModal
+          show={showModal}
+          handleCloseModal={handleCloseModal}
+          selectedCard={selectedCard}
+          handleLike={handleLike}
+          handleCollect={handleCollect}
+          likedCardBacks={likedCardBacks}
+          collectedCardBacks={collectedCardBacks}
+        />
+      )}
     </div>
   );
 }
 
 export default UserCollection;
+
+

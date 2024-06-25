@@ -2,22 +2,15 @@ import React, { useState, useEffect } from "react";
 import ProjectOmegaApi from "../api/api";
 import CardBackCard from "./CardBackCard";
 import LoadingSpinner from "../common/LoadingSpinner";
+import CardBackModal from "./CardBackModal";
 import "./CardBackList.css"; // Assuming you have a CSS file for custom styles
-
-/** Show page with list of card backs.
- *
- * On mount, loads card backs from API.
- * Re-loads filtered card backs on submit from search form.
- *
- * This is routed to at /cardbacks
- *
- * Routes -> { CardBackCard }
- */
 
 function CardBackList() {
   console.debug("CardBackList");
 
   const [cardBacks, setCardBacks] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(function getCardBacksOnMount() {
     console.debug("CardBackList useEffect getCardBacksOnMount");
@@ -30,6 +23,16 @@ function CardBackList() {
     setCardBacks(cardBacks);
   }
 
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedCard(null);
+  };
+
   if (!cardBacks) return <LoadingSpinner />;
 
   return (
@@ -38,7 +41,11 @@ function CardBackList() {
       <div className="card-back-list">
         {cardBacks.length ? (
           cardBacks.map((c) => (
-            <div key={c.id} className="card-back-list-item">
+            <div
+              key={c.id}
+              className="card-back-list-item"
+              onClick={() => handleCardClick(c)}
+            >
               <CardBackCard
                 id={c.id}
                 name={c.name}
@@ -54,9 +61,20 @@ function CardBackList() {
           <p>Sorry, no results were found!</p>
         )}
       </div>
+
+      {selectedCard && (
+        <CardBackModal
+          show={showModal}
+          handleCloseModal={handleCloseModal}
+          selectedCard={selectedCard}
+        />
+      )}
     </div>
   );
 }
 
 export default CardBackList;
+
+
+
 

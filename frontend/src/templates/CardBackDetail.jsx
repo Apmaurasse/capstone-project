@@ -1,72 +1,84 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { Modal, Button } from "react-bootstrap";
 import ProjectOmegaApi from "../api/api";
 import ProjectOmegaContext from "../auth/ProjectOmegaContext";
 import LoadingSpinner from "../common/LoadingSpinner";
-import "./CardBackDetail.css"; // Import CSS file for custom styles
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faCheck } from "@fortawesome/free-solid-svg-icons";
+import "./CardBackDetail.css"; // Assuming you have a CSS file for custom styles
 
-/** CardBack Detail page.
- *
- * Renders information about a card back.
- * 
- * Routed at /cardbacks/:id
- *
- * Routes -> CardBackDetail 
- */
-
-function CardBackDetail() {
-  const { id } = useParams();
-  console.debug("CardBackDetail", "id=", id);
-
+function CardBackDetail({ id, show, handleClose }) {
   const [cardBack, setCardBack] = useState(null);
   const { likeCardBack, unlikeCardBack, likedCardBacks, collectCardBack, uncollectCardBack, collectedCardBacks } = useContext(ProjectOmegaContext);
 
-  useEffect(function getCardBackForUser() {
-    async function getCardBack() {
-      setCardBack(await ProjectOmegaApi.getCardBack(id));
+  useEffect(() => {
+    async function getCardBackForUser() {
+      try {
+        const cardBackData = await ProjectOmegaApi.getCardBack(id);
+        setCardBack(cardBackData);
+      } catch (error) {
+        console.error("Failed to fetch card back", error);
+      }
     }
 
-    getCardBack();
+    if (id) {
+      getCardBackForUser();
+    }
   }, [id]);
 
   if (!cardBack) return <LoadingSpinner />;
 
   const handleLike = async () => {
-    if (likedCardBacks.has(Number(id))) {  // Ensure ID is a number
-      await unlikeCardBack(Number(id));
-    } else {
-      await likeCardBack(Number(id));
+    try {
+      if (likedCardBacks.has(Number(id))) {
+        await unlikeCardBack(Number(id));
+      } else {
+        await likeCardBack(Number(id));
+      }
+    } catch (error) {
+      console.error("Failed to update like status", error);
     }
   };
 
   const handleCollect = async () => {
-    if (collectedCardBacks.has(Number(id))) {  // Ensure ID is a number
-      await uncollectCardBack(Number(id));
-    } else {
-      await collectCardBack(Number(id));
+    try {
+      if (collectedCardBacks.has(Number(id))) {
+        await uncollectCardBack(Number(id));
+      } else {
+        await collectCardBack(Number(id));
+      }
+    } catch (error) {
+      console.error("Failed to update collect status", error);
     }
   };
 
   return (
-    <div className="card-back-detail-container">
-      <h4>{cardBack.name}</h4>
-      <p>{cardBack.text}</p>
-      <div className="image-container">
-        <img src={cardBack.imageUrl} alt={cardBack.name} className="card-back-image" />
-        <div className="overlay">
-          <button className="overlay-button" onClick={handleLike}>
-            {likedCardBacks.has(Number(id)) ? "Unlike" : "Like"}
-          </button>
-          <button className="overlay-button" onClick={handleCollect}>
-            {collectedCardBacks.has(Number(id)) ? "Remove from Collection" : "Add to Collection"}
-          </button>
+    <Modal show={show} onHide={handleClose} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>{cardBack.name}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p>{cardBack.text}</p>
+        {cardBack.imageUrl && (
+          <img src={cardBack.imageUrl} alt={cardBack.name} className="card-back-image" />
+        )}
+        <div className="action-buttons">
+          <Button className="like-button" onClick={handleLike}>
+            <FontAwesomeIcon icon={faHeart} className={likedCardBacks.has(Number(id)) ? "liked" : ""} />{" "}
+            {likedCardBacks.has(Number(id)) ? "Liked" : "Like"}
+          </Button>
+          <Button className="collect-button" onClick={handleCollect}>
+            <FontAwesomeIcon icon={faCheck} className={collectedCardBacks.has(Number(id)) ? "collected" : ""} />{" "}
+            {collectedCardBacks.has(Number(id)) ? "Collected" : "Add to Collection"}
+          </Button>
         </div>
-      </div>
-    </div>
+      </Modal.Body>
+    </Modal>
   );
 }
 
 export default CardBackDetail;
+
 
 
 
