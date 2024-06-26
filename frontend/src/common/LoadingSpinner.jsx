@@ -2,7 +2,7 @@ import React from "react";
 
 const LoadingSpinner = () => {
     return (
-        <div>
+        <div data-testid="loading-spinner">
            <p>Loading...</p>
         </div>
     );
