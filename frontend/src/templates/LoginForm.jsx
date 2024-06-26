@@ -49,8 +49,9 @@ function LoginForm({ login }) {
           <div className="card-body">
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label>Username</label>
+                <label htmlFor="username">Username</label>
                 <input
+                  id="username"
                   name="username"
                   className="form-control"
                   value={formData.username}
@@ -60,9 +61,10 @@ function LoginForm({ login }) {
                 />
               </div>
               <div className="form-group">
-                <label>Password</label>
+                <label htmlFor="password">Password</label>
                 <input
                   type="password"
+                  id="password"
                   name="password"
                   className="form-control"
                   value={formData.password}
@@ -72,9 +74,7 @@ function LoginForm({ login }) {
                 />
               </div>
 
-              {formErrors.length
-                ? <Alert type="danger" messages={formErrors} />
-                : null}
+              {formErrors.length ? <Alert type="danger" messages={formErrors} /> : null}
 
               <button
                 className="btn btn-primary float-right button"

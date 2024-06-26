@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 import ProjectOmegaContext from "../auth/ProjectOmegaContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from "../common/logoipsum-245.svg";
 
 function NavbarComponent({ logout }) {
     const { currentUser } = useContext(ProjectOmegaContext);
@@ -32,7 +33,8 @@ function NavbarComponent({ logout }) {
 
     return (
         <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
-            <Navbar.Brand as={Link} to="/" className="ms-4">Project Omega</Navbar.Brand>
+            <Navbar.Brand as={Link} to="/" className="ms-4">
+            <img src={logo} alt="Project Omega Logo" width="50" height="39" className="d-inline-block align-top" />Project Omega</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">

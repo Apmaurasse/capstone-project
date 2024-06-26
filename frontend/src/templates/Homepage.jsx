@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import ProjectOmegaContext from "../auth/ProjectOmegaContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from "../common/logoipsum-245.svg";
 
 /** Homepage of site.
  *
@@ -35,7 +36,8 @@ function Homepage() {
   return (
     <div style={styles.container}>
       <div style={styles.content}>
-        <h1>Project Omega</h1>
+       
+        <h1> <img src={logo} alt="Project Omega" />Project Omega</h1>
 
         {currentUser ? (
           <h2>

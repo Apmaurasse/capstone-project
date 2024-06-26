@@ -166,12 +166,15 @@ class User {
       data.password_hash = await bcrypt.hash(data.password_hash, BCRYPT_WORK_FACTOR);
     }
 
+    data.updated_at = new Date();
+
     const { setCols, values } = sqlForPartialUpdate(
         data,
         {
           firstName: "first_name",
           lastName: "last_name",
           isAdmin: "is_admin",
+          updated_at: "updated_at"
         });
     const usernameVarIdx = "$" + (values.length + 1);
 
@@ -182,7 +185,8 @@ class User {
                                 email,
                                 first_name AS "firstName",
                                 last_name AS "lastName",
-                                is_admin AS "isAdmin"`;
+                                is_admin AS "isAdmin",
+                                updated_at`;
     const result = await db.query(querySql, [...values, username]);
     const user = result.rows[0];
 

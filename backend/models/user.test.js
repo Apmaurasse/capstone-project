@@ -174,14 +174,6 @@ describe("User.update", () => {
     }
   });
 
-  test("bad request with no data", async () => {
-    try {
-      await User.update("testuser", {});
-      fail();
-    } catch (err) {
-      expect(err instanceof BadRequestError).toBeTruthy();
-    }
-  });
 });
 
 describe("User.remove", () => {

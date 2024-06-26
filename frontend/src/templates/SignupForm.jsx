@@ -51,9 +51,10 @@ function SignupForm({ signup }) {
           <div className="card-body">
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label>Username</label>
+                <label htmlFor="username">Username</label>
                 <input
                   type="text"
+                  id="username"
                   name="username"
                   className="form-control"
                   value={formData.username}
@@ -61,9 +62,10 @@ function SignupForm({ signup }) {
                 />
               </div>
               <div className="form-group">
-                <label>Email</label>
+                <label htmlFor="email">Email</label>
                 <input
                   type="email"
+                  id="email"
                   name="email"
                   className="form-control"
                   value={formData.email}
@@ -71,9 +73,10 @@ function SignupForm({ signup }) {
                 />
               </div>
               <div className="form-group">
-                <label>Password</label>
+                <label htmlFor="password">Password</label>
                 <input
                   type="password"
+                  id="password"
                   name="password"
                   className="form-control"
                   value={formData.password}
@@ -81,9 +84,10 @@ function SignupForm({ signup }) {
                 />
               </div>
               <div className="form-group">
-                <label>First Name</label>
+                <label htmlFor="firstName">First Name</label>
                 <input
                   type="text"
+                  id="firstName"
                   name="firstName"
                   className="form-control"
                   value={formData.firstName}
@@ -91,9 +95,10 @@ function SignupForm({ signup }) {
                 />
               </div>
               <div className="form-group">
-                <label>Last Name</label>
+                <label htmlFor="lastName">Last Name</label>
                 <input
                   type="text"
+                  id="lastName"
                   name="lastName"
                   className="form-control"
                   value={formData.lastName}
