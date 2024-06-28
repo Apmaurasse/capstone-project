@@ -33,7 +33,7 @@ html, body, #root {
 
 .card-back-list-item {
   flex: 0 0 auto; /* Prevent items from stretching */
-  margin-right: 30px; /* Increased space between card backs */
+  margin-right: 30px; /* Increased space between card backs */ 
 }
 
 .card-back-list-item:last-child {

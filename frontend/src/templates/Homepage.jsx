@@ -37,7 +37,7 @@ function Homepage() {
     <div style={styles.container}>
       <div style={styles.content}>
        
-        <h1> <img src={logo} alt="Project Omega" />Project Omega</h1>
+        <h1> <img src={logo} alt="Card Back Quest" />Card Back Quest</h1>
 
         {currentUser ? (
           <h2>

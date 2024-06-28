@@ -5,7 +5,7 @@ import ProjectOmegaContext from "../auth/ProjectOmegaContext";
 import LoadingSpinner from "../common/LoadingSpinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faCheck } from "@fortawesome/free-solid-svg-icons";
-import "./CardBackDetail.css"; // Assuming you have a CSS file for custom styles
+import "./CardBackDetail.css"; 
 
 function CardBackDetail({ id, show, handleClose }) {
   const [cardBack, setCardBack] = useState(null);

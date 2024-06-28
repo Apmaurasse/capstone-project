@@ -5,6 +5,7 @@ import LoadingSpinner from "../common/LoadingSpinner";
 import CardBackModal from "./CardBackModal";
 import "./CardBackList.css"; // Assuming you have a CSS file for custom styles
 
+
 function CardBackList() {
   console.debug("CardBackList");
 

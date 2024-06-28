@@ -44,6 +44,7 @@ function CardBackModal({ show, handleCloseModal, selectedCard }) {
               <button onClick={() => handleCollect(selectedCard.id)} className="icon-button">
                 <FontAwesomeIcon icon={faCheckCircle} color={collectedCardBacks.has(selectedCard.id) ? 'green' : 'grey'} />
               </button>
+              <p>Click to add/remove</p>
             </div>
           </div>
         </div>

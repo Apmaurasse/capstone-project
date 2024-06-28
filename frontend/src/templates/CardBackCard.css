@@ -2,10 +2,24 @@
     background-color: darkgrey;
     color: white;
     border: none;
+    padding: 20px;
+    border-radius: 2px;
+    margin: 5px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+
+    position: relative;
+    width: 225px; /* Adjust the width as needed */
+    height: 275px; /* Adjust the height as needed */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .card-back-card:hover {
-    box-shadow: 0 0 15px 5px rgba(104, 104, 233, 0.7); /* Dark blue shadow on hover */
+    box-shadow: 0 0 15px 5px rgba(136, 136, 241, 0.7); 
   }
   
   .card-back-card .card-title {

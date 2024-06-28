@@ -11,13 +11,18 @@ function NavbarComponent({ logout }) {
     function LoggedInNavbar() {
         return (
             <>
-                <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
-                <Nav.Link as={Link} to="/cardbacks">Card Backs</Nav.Link>
-                <Nav.Link as={Link} to="/likes">Likes</Nav.Link>
-                <Nav.Link as={Link} to="/collection">Collection</Nav.Link>
-                <Nav.Link as={Link} to="/" onClick={logout}>
-                    Logout {currentUser.firstName || currentUser.username}
-                </Nav.Link>
+                <Nav.Item>
+                    <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link as={Link} to="/cardbacks">Card Backs</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link as={Link} to="/likes">Likes</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link as={Link} to="/collection">Collection</Nav.Link>
+                </Nav.Item>
             </>
         );
     }
@@ -25,8 +30,12 @@ function NavbarComponent({ logout }) {
     function LoggedOutNavbar() {
         return (
             <>
-                <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
-                <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                <Nav.Item>
+                    <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                </Nav.Item>
             </>
         );
     }
@@ -34,15 +43,33 @@ function NavbarComponent({ logout }) {
     return (
         <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
             <Navbar.Brand as={Link} to="/" className="ms-4">
-            <img src={logo} alt="Project Omega Logo" width="50" height="39" className="d-inline-block align-top" />Project Omega</Navbar.Brand>
+                <img
+                    src={logo}
+                    alt="Project Omega Logo"
+                    width="30"
+                    height="30"
+                    className="d-inline-block align-top"
+                />{' '}
+                Project Omega
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="ml-auto">
+                <Nav className="me-auto">
                     {currentUser ? LoggedInNavbar() : LoggedOutNavbar()}
                 </Nav>
+                {currentUser && (
+                    <Nav className="ms-auto">
+                        <Nav.Item>
+                            <Nav.Link as={Link} to="/" onClick={logout}>
+                                Logout {currentUser.firstName || currentUser.username}
+                            </Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                )}
             </Navbar.Collapse>
         </Navbar>
     );
 }
 
 export default NavbarComponent;
+
