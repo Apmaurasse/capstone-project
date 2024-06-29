@@ -22,7 +22,6 @@ export const TOKEN_STORAGE_ID = "project-omega-token";
  *   Is required to be set for most API calls. This is initially read from
  *   localStorage and synced to there via the useLocalStorage hook.
  *
- * App -> Routes
  */
 const ProjectOmegaFrontendApp = () => {
   const [infoLoaded, setInfoLoaded] = useState(false);

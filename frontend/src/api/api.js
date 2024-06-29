@@ -39,18 +39,10 @@ class ProjectOmegaApi {
     return res.user;
   }
 
-//TODO:
-// Add functions to get user's likes and collection.
-// Add functions to add to user's collection.
-// Add functions to remove from user's collection.
-// Add functions to add to user's likes.
-// Add functions to remove from user's likes.
-
   /** Get card backs (filtered by name if not undefined) */
 
   static async getCardBacks(name) {
     let res = await this.request("cardBacks", { name });
-    // console.log(res)
     return res.cardBacks;
   }
 
@@ -86,7 +78,6 @@ class ProjectOmegaApi {
 /** Get user's likes */
   static async getUserLikes(username) {
     let res = await this.request(`users/${username}/likes`);
-    // console.log(res.likes)
     return res.likes;
   }
 
@@ -134,6 +125,3 @@ static async hasUserCollected(username, cardBackId) {
 }
 export default ProjectOmegaApi;
 
-
-
-// TODO: Review hasUserLiked and hasUserCollected to check if a user has liked or collected a card back.

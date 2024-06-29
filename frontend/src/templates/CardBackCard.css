@@ -9,8 +9,8 @@
     transition: box-shadow 0.3s ease;
 
     position: relative;
-    width: 225px; /* Adjust the width as needed */
-    height: 275px; /* Adjust the height as needed */
+    width: 225px; 
+    height: 275px; 
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -27,12 +27,12 @@
   }
   
   .card-back-card .card-img-small {
-    height: 150px; /* Adjust the height as needed */
+    height: 150px; 
     object-fit: cover; /* Ensure the image covers the entire space */
   }
   
   .card-back-card .card-img {
-    height: 200px; /* Default size for larger images */
+    height: 200px; 
     object-fit: cover; /* Ensure the image covers the entire space */
   }
   

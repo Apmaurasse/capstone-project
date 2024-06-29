@@ -5,11 +5,8 @@ import logo from "../common/logoipsum-245.svg";
 
 /** Homepage of site.
  *
- * Shows welcome message or login/register buttons.
+ * Shows welcome message if user is logged in.
  *
- * Routed at /
- *
- * Routes -> Homepage
  */
 
 function Homepage() {
@@ -25,7 +22,7 @@ function Homepage() {
       alignItems: 'center',
     },
     content: {
-      backgroundColor: '#343a40', // Bootstrap dark grey color
+      backgroundColor: '#343a40', 
       color: 'white',
       padding: '20px',
       borderRadius: '4px',

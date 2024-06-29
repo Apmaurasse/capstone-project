@@ -4,7 +4,7 @@ import ProjectOmegaContext from "../auth/ProjectOmegaContext";
 import LoadingSpinner from "../common/LoadingSpinner";
 import CardBackCard from "./CardBackCard";
 import CardBackModal from "./CardBackModal";
-import "./CardBackList.css"; // Assuming you use the same CSS file for styles
+import "./CardBackList.css"; 
 
 function UserCollection() {
   const { likedCardBacks, collectedCardBacks, likeCardBack, unlikeCardBack, collectCardBack, uncollectCardBack } = useContext(ProjectOmegaContext);
@@ -77,7 +77,7 @@ function UserCollection() {
                 id={cardBack.id}
                 name={cardBack.name}
                 imageUrl={cardBack.imageUrl}
-                imageSize="small" // Set image size as required
+                imageSize="small" 
               />
             </div>
           ))}

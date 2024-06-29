@@ -35,8 +35,9 @@ class CardBack {
     // Finalize query and return results
 
     query += " ORDER BY id";
+    
     const cardbacksRes = await db.query(query, queryValues);
-    // console.log(cardbacksRes.rows); 
+ 
     return cardbacksRes.rows;
     
   }

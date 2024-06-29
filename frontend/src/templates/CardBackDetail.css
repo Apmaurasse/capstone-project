@@ -6,7 +6,7 @@
   
   .card-back-image {
     width: 100%;
-    max-width: 400px; /* Adjust max-width as needed */
+    max-width: 400px; 
     margin-bottom: 20px;
   }
   
@@ -25,11 +25,11 @@
   }
   
   .like-button .liked {
-    color: red; /* Color when liked */
+    color: red; 
   }
   
   .collect-button .collected {
-    color: green; /* Color when collected */
+    color: green; 
   }
   
   .like-button:hover,

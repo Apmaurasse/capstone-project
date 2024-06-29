@@ -2,10 +2,7 @@ import React, { useState, useContext } from "react";
 import Alert from "../common/Alert";
 import ProjectOmegaApi from "../api/api";
 import ProjectOmegaContext from "../auth/ProjectOmegaContext";
-import './Forms.css'; // Import the CSS file
-
-// eslint-disable-next-line
-// import useTimedMessage from "../hooks/useTimeMessage";
+import './Forms.css'; 
 
 /** Profile editing form.
  *
@@ -13,12 +10,6 @@ import './Forms.css'; // Import the CSS file
  * Submitting the form calls the API to save, and triggers user reloading
  * throughout the site.
  *
- * Confirmation of a successful save is normally a simple <Alert>, but
- * you can opt-in to our fancy limited-time-display message hook,
- * `useTimedMessage`, by switching the lines below.
- *
- * Routed as /profile
- * Routes -> ProfileForm -> Alert
  */
 
 function ProfileForm() {
@@ -32,9 +23,8 @@ function ProfileForm() {
   });
   const [formErrors, setFormErrors] = useState([]);
 
-  // switch to use our fancy limited-time-display message hook
   const [saveConfirmed, setSaveConfirmed] = useState(false);
-  // const [saveConfirmed, setSaveConfirmed] = useTimedMessage()
+
 
   console.debug(
     "ProfileForm",

@@ -1,20 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "../common/Alert";
-import './Forms.css'; // Import the CSS file
-
-// Todo:
-// Update signup form to route to cardbacks gallery.
+import './Forms.css';
 
 /** Signup form.
  *
  * Shows form and manages update to state on changes.
  * On submission:
  * - calls signup function prop
- * - redirects to /homepage route
- *
- * Routes -> SignupForm -> Alert
- * Routed as /signup
+ * - redirects to /homepage route with welcome message being displayed.
  */
 
 function SignupForm({ signup }) {

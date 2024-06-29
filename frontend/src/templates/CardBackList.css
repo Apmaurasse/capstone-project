@@ -41,13 +41,13 @@ html, body, #root {
 }
 
 .card-img-small {
-  height: 150px; /* Adjust the height as needed */
+  height: 150px; 
   width: auto; /* Ensure the image scales proportionally */
   object-fit: cover; /* Ensure the image covers the entire space */
 }
 
 .card-img {
-  height: 200px; /* Default size for larger images */
+  height: 200px; 
   width: auto; /* Ensure the image scales proportionally */
   object-fit: cover; /* Ensure the image covers the entire space */
 }

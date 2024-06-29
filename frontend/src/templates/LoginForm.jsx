@@ -1,20 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "../common/Alert";
-import './Forms.css'; // Import the CSS file
-
-// Todo: 
-// Update login form to route to cardbacks gallery.
+import './Forms.css';
 
 /** Login form.
  *
  * Shows form and manages update to state on changes.
  * On submission:
  * - calls login function prop
- * - redirects to /homepage route
+ * - redirects to /homepage route updated with welcome message.
  *
- * Routes -> LoginForm -> Alert
- * Routed as /login
  */
 
 function LoginForm({ login }) {

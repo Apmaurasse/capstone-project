@@ -3,7 +3,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import CardBackList from './CardBackList';
 import ProjectOmegaApi from '../api/api';
-import CardBackModal from './CardBackModal';
+
 
 // Mock the API call
 jest.mock('../api/api');

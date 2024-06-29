@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import "./CardBackCard.css"; // Assuming you have a CSS file for custom styles
+import "./CardBackCard.css"; 
 
 function CardBackCard({ name, imageUrl, imageSize, onClick }) {
   const imageSizeClass = imageSize === "small" ? "card-img-small" : "card-img";

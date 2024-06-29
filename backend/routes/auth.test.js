@@ -1,7 +1,7 @@
 "use strict";
 
 const request = require("supertest");
-const app = require("../app"); // Assuming your Express app is exported from app.js
+const app = require("../app"); 
 const db = require("../db");
 
 beforeEach(async function () {
@@ -34,5 +34,5 @@ describe("POST /auth/token", function () {
   });
 });
 
-// Add more tests as needed for edge cases and additional scenarios
+
 

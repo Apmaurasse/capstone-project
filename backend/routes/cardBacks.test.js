@@ -1,7 +1,7 @@
 "use strict";
 
 const request = require("supertest");
-const app = require("../app"); // Assuming your Express app is exported from app.js
+const app = require("../app"); 
 const db = require("../db");
 
 beforeEach(async function () {
@@ -63,7 +63,7 @@ describe("GET /cardbacks/:id", function () {
   });
 });
 
-// Add more tests as needed for other routes and edge cases
+
 
 
 

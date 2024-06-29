@@ -286,7 +286,6 @@ class User {
     );
 
     // Return an empty array if no likes are found
-    // console.log(result.rows.map(row => row.card_back_id))
     return result.rows.map(row => row.card_back_id);
   }
 
@@ -364,7 +363,6 @@ class User {
     );
 
     // Return an empty array if no collected card backs are found
-    // console.log(result.rows.map(row => row.card_back_id))
     return result.rows.map(row => row.card_back_id);
   }
 

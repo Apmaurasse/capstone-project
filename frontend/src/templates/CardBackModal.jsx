@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import ProjectOmegaContext from "../auth/ProjectOmegaContext";
-import "./CardBackModal.css"; // Assuming you will have a CSS file for modal styles
+import "./CardBackModal.css"; 
 
 function CardBackModal({ show, handleCloseModal, selectedCard }) {
   const { likedCardBacks, collectedCardBacks, likeCardBack, unlikeCardBack, collectCardBack, uncollectCardBack } = useContext(ProjectOmegaContext);
