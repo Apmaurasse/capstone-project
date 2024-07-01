@@ -1,7 +1,9 @@
-const db = require('./db');
+const db = require('../db');
 const { fetchAllCardBacks } = require('./fetchCardBacks');
 
 // Store card backs in database.
+// When being used it is moved to the backend folder.
+// When not being used it is moved to the battlenet folder.
 
 
 async function storeCardBacks() {

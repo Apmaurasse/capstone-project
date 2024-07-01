@@ -1,9 +1,12 @@
 require('dotenv').config();
 const axios = require('axios');
 
-// Fetches card backs from Battlenet API.
+// Fetches card backs from Battlenet API. 
+// When being used it is moved to the backend folder.
+// When not being used it is moved to the battlenet folder.
 
 async function getAccessToken() {
+
     const response = await axios.post('https://oauth.battle.net/token', null, {
         params: {
             grant_type: 'client_credentials',
