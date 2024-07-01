@@ -2,10 +2,10 @@
 [Visit Card Back Quest](https://capstone-frontend-4nmb.onrender.com)
 
 ## Description
-Card Back Quest is a website for Hearthstone enthusiasts to explore, collect, and showcase their favorite card backs. Users can create accounts, view detailed designs, like their favorites, and manage their personal card back collections.
+Card Back Quest is a website for Hearthstone enthusiasts to explore, collect, and showcase their favorite card back designs. Users can create accounts, view detailed designs, like their favorites, and manage their personal card back collection.
 
 ## Features
-These features were implemented to provide a comprehensive and engaging experience for users who enjoy the Hearthstone card back designs, allowing them to interact with and manage their collections in a fun and organized way:
+These features were implemented to provide a comprehensive and engaging experience for users who enjoy the Hearthstone card backs, allowing them to interact with and manage their collection in a fun and organized way:
 - **User Authentication:** Users can sign up, log in, and manage their profiles securely.
 - **Card Back Gallery:** Browse all available Hearthstone card backs with detailed descriptions and images.
 - **Favorites & Collections:** Like card backs and add them to your personal collection.
@@ -24,12 +24,14 @@ To run the tests:
 ## User Flow
 - **Landing Page:** Users can sign up or log in.
 - **Dashboard:** After logging in, users can view their liked and collected card backs.
-- **Card Back Gallery:** Browse and search for card backs, like them, and add them to collections.
-- **Profile Page:** Edit profile details and manage collections.
+- **Card Back Gallery:** Browse for card backs, like them, and add them to your collection.
+- **Profile Page:** Edit profile details and manage collection.
 - **Logout:** Securely log out to end the session.
 
 ## API
 **`Battle.net` API**
+https://develop.battle.net/
+
 `Battle.net` API is utilized to fetch data about Hearthstone card backs. The API provides endpoints for retrieving all available card backs and specific card details.
 
 **Custom API**

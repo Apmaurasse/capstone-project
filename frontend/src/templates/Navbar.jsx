@@ -45,12 +45,12 @@ function NavbarComponent({ logout }) {
             <Navbar.Brand as={Link} to="/" className="ms-4">
                 <img
                     src={logo}
-                    alt="Project Omega Logo"
+                    alt="Card Back Quest Logo"
                     width="30"
                     height="30"
                     className="d-inline-block align-top"
                 />{' '}
-                Project Omega
+                Card Back Quest
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
